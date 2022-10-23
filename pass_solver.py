@@ -6,8 +6,6 @@ import time
 import argparse
 from multiprocessing import Process, cpu_count, Value
 
-
-ARCHIVO = 'archivo.pdf.gpg' 
 founded = Value('i', False)
 
 def pass_solver(i, file):
@@ -20,10 +18,11 @@ def pass_solver(i, file):
                 password = password.rstrip('\n')
                 if(check_pass(password, file)):
                     end_time = time.time()
-                    total_time = end_time - start_time
-                    print('La clave es: {}'.format(password))
-                    open('password.txt', 'a').write('Contraseña: '+password +'\n'+calc_hora(total_time)+'\n')
+                    print('[Proceso {}] Clave encontrada: {}'.format(i,password))
+                    open('password.txt', 'a').write('Contraseña: '+password +'\n'+calc_hora(end_time - start_time)+'\n')
                     sys.exit()
+        end_time = time.time()
+        print('[Proceso {}] No se encontro la contraseña. {}'.format(i, calc_hora(end_time - start_time)))
     except KeyboardInterrupt:
         print('Saliendo...')
         sys.exit()

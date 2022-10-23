@@ -9,7 +9,7 @@ from multiprocessing import cpu_count
 
 def crear_dicc(number_of_dicc, max_length, min_length=1):
     try:
-        combinations=calc_combination(max_length, min_length)/number_of_dicc
+        combinations=calc_combinations(max_length, min_length)/number_of_dicc
         index=1
         x=0
         for i in range(min_length, max_length+1):
@@ -26,7 +26,7 @@ def crear_dicc(number_of_dicc, max_length, min_length=1):
         print('Saliendo...')
         exit(0)
 
-def calc_combination(max_length, min_length):
+def calc_combinations(max_length, min_length):
     combinations = 0
     for i in range(min_length, max_length+1):
         combinations += len(string.ascii_lowercase) ** i
